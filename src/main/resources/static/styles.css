@@ -1,0 +1,165 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffe5ec, #ffd0d8 30%, #f7f7ff 100%);
+    color: #1f2937;
+}
+
+.app-shell {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.brand {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e11d48;
+}
+
+.ghost-btn {
+    border: none;
+    background: rgba(255,255,255,0.6);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1.5fr 0.7fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.card-panel,
+.matches-panel {
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    padding: 20px;
+}
+
+.profile-card {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #ddd;
+}
+
+.profile-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 22px 20px 18px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.78));
+    color: #fff;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.profile-header span {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+#profile-bio {
+    margin: 0;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.9);
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    flex: 1;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.action-btn.dislike {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.action-btn.like {
+    background: linear-gradient(135deg, #f43f5e, #ec4899);
+    color: white;
+}
+
+.matches-panel h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.matches-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.matches-list li {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: rgba(15, 23, 42, 0.05) 0 2px 12px;
+}
+
+@media (max-width: 800px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        height: 460px;
+    }
+}

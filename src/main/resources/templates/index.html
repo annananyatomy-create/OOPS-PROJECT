@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder Clone</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand">Tinder</div>
+            <button class="ghost-btn">Matches</button>
+        </header>
+
+        <main class="content">
+            <section class="card-panel">
+                <div id="profile-card" class="profile-card">
+                    <img id="profile-image" src="" alt="Profile">
+                    <div class="profile-overlay">
+                        <div class="profile-header">
+                            <h2 id="profile-name">Loading...</h2>
+                            <span id="profile-age">0</span>
+                        </div>
+                        <p id="profile-bio">Finding your next match...</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="dislike-btn" class="action-btn dislike" type="button">✕ Pass</button>
+                    <button id="like-btn" class="action-btn like" type="button">♥ Like</button>
+                </div>
+            </section>
+
+            <aside class="matches-panel">
+                <h3>Matches</h3>
+                <ul id="matches-list" class="matches-list">
+                    <li>No matches yet</li>
+                </ul>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        const userId = 1;
+        let profiles = [];
+        let currentIndex = 0;
+
+        async function loadProfiles() {
+            const response = await fetch(`/api/profiles?userId=${userId}`);
+            profiles = await response.json();
+            currentIndex = 0;
+            renderCurrentProfile();
+        }
+
+        async function loadMatches() {
+            const response = await fetch(`/api/matches?userId=${userId}`);
+            const matches = await response.json();
+            const list = document.getElementById('matches-list');
+            list.innerHTML = '';
+
+            if (!matches || matches.length === 0) {
+                list.innerHTML = '<li>No matches yet</li>';
+                return;
+            }
+
+            matches.forEach(match => {
+                const item = document.createElement('li');
+                item.textContent = match.matchedWith;
+                list.appendChild(item);
+            });
+        }
+
+        function renderCurrentProfile() {
+            if (!profiles || profiles.length === 0) {
+                document.getElementById('profile-name').textContent = 'No more profiles';
+                document.getElementById('profile-bio').textContent = 'Check back later for new matches.';
+                document.getElementById('profile-image').src = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80';
+                document.getElementById('profile-age').textContent = '';
+                return;
+            }
+
+            const profile = profiles[currentIndex];
+            document.getElementById('profile-image').src = profile.photo;
+            document.getElementById('profile-name').textContent = profile.name;
+            document.getElementById('profile-age').textContent = profile.age;
+            document.getElementById('profile-bio').textContent = profile.bio;
+        }
+
+        async function handleSwipe(liked) {
+            if (!profiles || profiles.length === 0) {
+                return;
+            }
+
+            const profile = profiles[currentIndex];
+            const result = await fetch('/api/swipe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ userId, targetId: profile.id, liked })
+            });
+
+            const payload = await result.json();
+            if (payload.matched) {
+                alert('It\'s a match!');
+            }
+
+            currentIndex += 1;
+            if (currentIndex >= profiles.length) {
+                currentIndex = 0;
+            }
+            renderCurrentProfile();
+            loadMatches();
+        }
+
+        document.getElementById('like-btn').addEventListener('click', () => handleSwipe(true));
+        document.getElementById('dislike-btn').addEventListener('click', () => handleSwipe(false));
+
+        loadProfiles();
+        loadMatches();
+    </script>
+</body>
+</html>
