@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f8f4">
+    <title>Meet Cute | Find your kind of person</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="wordmark" href="/" aria-label="Meet Cute home"><span class="brand-mark">m</span> meet cute</a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a class="nav-link active" href="/" aria-current="page"><span class="nav-icon">◉</span> Discover</a>
+            <a class="nav-link" href="#likes" id="likes-link"><span class="nav-icon">♡</span> Likes <span class="like-count" id="like-count">0</span></a>
+            <a class="nav-link" href="#chats" id="chats-link"><span class="nav-icon">▤</span> Chats <span class="chat-count">2</span></a>
+        </nav>
+        <button class="profile-menu" type="button" aria-label="Your profile"><span class="avatar-initials">A</span><span class="profile-menu-name">Alex</span><span class="menu-chevron">⌄</span></button>
+    </header>
+
+    <main class="page-shell">
+        <section class="discovery-heading" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow"><span class="live-dot"></span> YOUR CITY, YOUR PEOPLE</p>
+                <h1 id="page-title">A little closer<br><span>to a good thing.</span></h1>
+            </div>
+            <button class="filter-button" id="filter-button" type="button" aria-label="Discovery preferences"><span aria-hidden="true">☷</span> Preferences <span class="filter-dot"></span></button>
+        </section>
+
+        <section class="discovery-layout" aria-label="Discover people">
+            <aside class="side-note">
+                <span class="note-number">01 <span class="note-rule"></span> 05</span>
+                <p class="side-quote">“The best stories<br>start with <em>hello.</em>”</p>
+                <div class="location-note"><span class="pin-icon">⌖</span><div><strong>Brooklyn, NY</strong><small>Showing people nearby</small></div></div>
+                <div class="prompt-note"><span class="prompt-spark">✳</span><div><strong>Something in common</strong><small>People who like the little things you do.</small></div></div>
+            </aside>
+
+            <div class="card-column">
+                <div class="stack-wrap" id="stack-wrap">
+                    <div class="card-shadow shadow-back" aria-hidden="true"></div>
+                    <article class="profile-card" id="profile-card" aria-live="polite">
+                        <div class="profile-photo" id="profile-photo">
+                            <div class="photo-topline"><span class="verified-badge"><span>✓</span> VERIFIED</span><button class="more-button" type="button" aria-label="More profile options">···</button></div>
+                            <div class="photo-gradient"></div>
+                            <div class="photo-copy"><span class="profile-badge" id="profile-badge"></span><h2 id="profile-name">Finding your people…</h2><p class="profile-subtitle" id="profile-subtitle"></p></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-meta"><span class="meta-location"><span aria-hidden="true">⌖</span> <span id="profile-distance"></span></span><span class="online-status"><span></span> Active today</span></div>
+                            <p class="profile-bio" id="profile-bio"></p>
+                            <div class="interest-list" id="interest-list"></div>
+                        </div>
+                        <div class="swipe-stamp" id="swipe-stamp" aria-hidden="true"></div>
+                    </article>
+                </div>
+                <div class="action-row" aria-label="Choose your response">
+                    <button class="action-button pass-button" id="pass-button" type="button" aria-label="Pass"><span>×</span></button>
+                    <button class="action-button rewind-button" id="rewind-button" type="button" aria-label="Undo last swipe" title="Undo last swipe"><span>↶</span></button>
+                    <button class="action-button like-button" id="like-button" type="button" aria-label="Like"><span>♥</span></button>
+                </div>
+                <p class="keyboard-hint"><kbd>←</kbd> pass <span>·</span> <kbd>→</kbd> like</p>
+            </div>
+
+            <aside class="right-rail">
+                <div class="matches-heading"><div><span class="eyebrow">GOOD THINGS AHEAD</span><h2>Your connections</h2></div><span class="matches-count">02</span></div>
+                <div class="match-preview"><div class="match-avatar avatar-one"><span>J</span></div><div class="match-copy"><strong>Jamie, 28</strong><small>Matched yesterday</small></div><span class="unread-dot"></span></div>
+                <div class="match-preview"><div class="match-avatar avatar-two"><span>R</span></div><div class="match-copy"><strong>Riley, 27</strong><small>You: That sounds lovely!</small></div></div>
+                <a class="all-matches" href="#chats">See all conversations <span>↗</span></a>
+                <div class="quote-card"><span class="quote-mark">“</span><p>Good chemistry is really just being weird together.</p><small>A REMINDER FROM US</small></div>
+            </aside>
+        </section>
+        <p class="page-footnote">A thoughtful little corner of the internet <span>·</span> Be kind out there.</p>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog class="match-dialog" id="match-dialog">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="Close">×</button>
+        <span class="match-sparkle">✳</span>
+        <p class="eyebrow">LOOK AT THAT</p>
+        <h2>It's a <em>meet cute.</em></h2>
+        <p class="match-message" id="match-message"></p>
+        <button class="message-button" id="message-button" type="button">Lovely. Keep going <span>→</span></button>
+    </dialog>
+</body>
+</html>
